@@ -4,22 +4,22 @@ An ergonomic keyboard layout inspired by [Miryoku](https://github.com/manna-harb
 
 ## Code
 
-- [Vial layout file](./dm-5x6_5-clbn.vil)
+- [Vial layout file](./vial/charisma.vil)
 
 ## Layers
 
 ### Engram
 
-![Layer 0: Engram](./images/dm-5x6_5-clbn.layer-0.png)
+![Layer 0: Engram](./images/charisma-vial.layer-engram.png)
 
 ### Qwerty
 
-![Layer 1: Qwerty](./images/dm-5x6_5-clbn.layer-1.png)
+![Layer 1: Qwerty](./images/charisma-vial.layer-qwerty.png)
 
-### Navigation + Clipboard 
+### Navigation + Clipboard
 
-![Layer 2: Nav+Clip](./images/dm-5x6_5-clbn.layer-2.png)
+![Layer 2: Nav+Clip](./images/charisma-vial.layer-nav.png)
 
 ### Numbers + Symbols
 
-![Layer 3: Num+Sym](./images/dm-5x6_5-clbn.layer-3.png)
+![Layer 3: Num+Sym](./images/charisma-vial.layer-num-sym.png)
