@@ -6,10 +6,12 @@
 // Layers
 #define L_ENGRAM 0
 #define L_QWERTY 1
+#define L_MEDIA 2
 #define L_NAV 3
 #define L_NUM 6
 
 // Top thumb rows: layer switching (turn on `layer` when held, `kc` when tapped)
+#define LT_MED  LT(L_MEDIA, KC_ESC)
 #define LT_NAV  LT(L_NAV,   KC_SPACE)
 #define LT_NUM  LT(L_NUM,   KC_BACKSPACE)
 
@@ -70,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  │       ║   G   ║   X   ║   J   ║   K   ║  - _  │                              │  ? !  ║   R   ║   M   ║   F   ║   P   ║  / ?  │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
      *                  │       ║       │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
-     *                  └───────╨───────┘    │  Esc  ║Spc Nav║  Tab  │    │ Enter ║Bsp Num║  Del  │    └───────╨───────┘
+     *                  └───────╨───────┘    │Esc Med║Spc Nav║  Tab  │    │ Enter ║Bsp Num║  Del  │    └───────╨───────┘
      *                                       └───────╬═══════╬═══════╡    ╞═══════╬═══════╬───────┘
      *                                               │Engram ║ Latin │    │  Cyr  ║ Qwerty│
      *                                               └───────╨───────┘    └───────╨───────┘
@@ -79,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
     KC_GRV,  E_HRM_C, E_HRM_I, E_HRM_E, E_HRM_A, KC_COMM,                               KC_DOT,  E_HRM_H, E_HRM_T, E_HRM_S, E_HRM_N, KC_Q,
     XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLASH,
-                      XXXXXXX, XXXXXXX,     KC_ESC,  LT_NAV,  KC_TAB,      KC_ENT,  LT_NUM,  KC_DEL,      XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX,     LT_MED,  LT_NAV,  KC_TAB,      KC_ENT,  LT_NUM,  KC_DEL,      XXXXXXX, XXXXXXX,
                                                      TO_ENGR, HO_LNG1,     HO_LNG2, TO_QWER
   ),
 
@@ -106,6 +108,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
                       XXXXXXX, XXXXXXX,     _______, _______, _______,     _______, _______, _______,     XXXXXXX, XXXXXXX,
                                                      _______, _______,     _______, _______
+  ),
+
+  [L_MEDIA] = LAYOUT_5x6_5(
+    /*
+     *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
+     *  │ Reset ║       ║       ║       ║       ║       │                              │       ║       ║       ║       ║       ║       │
+     *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
+     *  │       ║       ║       ║       ║       ║       │                              │RGB Tog║RGB Mod║RGB Hue║RGB Sat║RGB Val║       │
+     *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
+     *  │       ║  Ctrl ║  Opt  ║  Cmd  ║ Shift ║       │                              │       ║ Prev  ║ Vol ↓ ║ Vol ↑ ║ Next  ║       │
+     *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
+     *  │       ║       ║       ║       ║       ║       │                              │       ║       ║ Bri ↓ ║ Bri ↑ ║       ║       │
+     *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
+     *                  │       ║       │    ┌┬┬┬┬┬┬┬╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
+     *                  └───────╨───────┘    ││┃┃┃┃┃│║       ║       │    │       ║ Play  ║ Mute  │    └───────╨───────┘
+     *                                       └┴┴┴┴┴┴┴╬═══════╬═══════╡    ╞═══════╬═══════╬───────┘
+     *                                               │       ║       │    │       ║       │
+     *                                               └───────╨───────┘    └───────╨───────┘
+     */
+    RESET,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,
+    XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, XXXXXXX,                               XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, KC_MPLY, KC_MUTE,     XXXXXXX, XXXXXXX,
+                                                     XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
 
   [L_NAV] = LAYOUT_5x6_5(
