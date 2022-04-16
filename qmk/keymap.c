@@ -30,6 +30,8 @@
 #define _L_QWER TO(_QWERTY)
 #define _NAV_SP LT(_NAVIGATION, KC_SPACE)
 #define _NUM_BS LT(_NUMBERS, KC_BACKSPACE)
+#define _LANG_1 LCMD(LSFT(KC_1))
+#define _LANG_2 LCMD(LSFT(KC_2))
 
 #define _REDO   SCMD(KC_Z)
 #define _PASTE  LCMD(KC_V)
@@ -70,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_GRV, _LCTL_C,_LOPT_I,_LCMD_E,_LSFT_A,KC_COMM,                               KC_DOT, _RSFT_H,_RCMD_T,_LOPT_S,_RCTL_N,KC_Q,
        XXXXXXX,KC_G,   KC_X,   KC_J,   KC_K,   KC_MINS,                               U_QUEX, KC_R,   KC_M,   KC_F,   KC_P,   KC_SLASH,
                        XXXXXXX,XXXXXXX,     KC_ESC, _NAV_SP,KC_TAB,      KC_ENT, _NUM_BS,KC_DEL,      XXXXXXX,XXXXXXX,
-                                                    _L_ENGR,XXXXXXX,     XXXXXXX,_L_QWER
+                                                    _L_ENGR,_LANG_1,     _LANG_2,_L_QWER
   ),
 
   [_QWERTY] = LAYOUT_5x6_5(
