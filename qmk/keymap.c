@@ -8,11 +8,13 @@
 #define L_QWERTY 1
 #define L_MEDIA 2
 #define L_NAV 3
+#define L_SYM 5
 #define L_NUM 6
 
 // Top thumb rows: layer switching (turn on `layer` when held, `kc` when tapped)
 #define LT_MED  LT(L_MEDIA, KC_ESC)
 #define LT_NAV  LT(L_NAV,   KC_SPACE)
+#define LT_SYM  LT(L_SYM,   KC_ENTER)
 #define LT_NUM  LT(L_NUM,   KC_BACKSPACE)
 
 // Bottom thumb rows: layer switching (turn on `layer` and turn off other layers)
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  │       ║   G   ║   X   ║   J   ║   K   ║  - _  │                              │  ? !  ║   R   ║   M   ║   F   ║   P   ║  / ?  │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
      *                  │       ║       │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
-     *                  └───────╨───────┘    │Esc Med║Spc Nav║  Tab  │    │ Enter ║Bsp Num║  Del  │    └───────╨───────┘
+     *                  └───────╨───────┘    │Esc Med║Spc Nav║  Tab  │    │Ent Sym║Bsp Num║  Del  │    └───────╨───────┘
      *                                       └───────╬═══════╬═══════╡    ╞═══════╬═══════╬───────┘
      *                                               │Engram ║ Latin │    │  Cyr  ║ Qwerty│
      *                                               └───────╨───────┘    └───────╨───────┘
@@ -81,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
     KC_GRV,  E_HRM_C, E_HRM_I, E_HRM_E, E_HRM_A, KC_COMM,                               KC_DOT,  E_HRM_H, E_HRM_T, E_HRM_S, E_HRM_N, KC_Q,
     XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLASH,
-                      XXXXXXX, XXXXXXX,     LT_MED,  LT_NAV,  KC_TAB,      KC_ENT,  LT_NUM,  KC_DEL,      XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX,     LT_MED,  LT_NAV,  KC_TAB,      LT_SYM,  LT_NUM,  KC_DEL,      XXXXXXX, XXXXXXX,
                                                      TO_ENGR, HO_LNG1,     HO_LNG2, TO_QWER
   ),
 
@@ -157,6 +159,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, XXXXXXX,                               KC_PGUP, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               KC_PGDN, U_HOME,  U_WRD_L, U_WRD_R, U_END,   XXXXXXX,
                       XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX,     KC_ENT,  KC_BSPC, KC_DEL,      XXXXXXX, XXXXXXX,
+                                                     XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
+  ),
+
+  [L_SYM] = LAYOUT_5x6_5(
+    /*
+     *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
+     *  │       ║       ║       ║       ║       ║       │                              │       ║       ║       ║       ║       ║       │
+     *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
+     *  │       ║   {   ║   &   ║   *   ║   (   ║   }   │                              │       ║       ║       ║       ║       ║       │
+     *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
+     *  │       ║   :   ║   $   ║   %   ║   ^   ║   +   │                              │       ║ Shift ║  Cmd  ║  Opt  ║ Ctrl  ║       │
+     *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
+     *  │       ║   ~   ║   !   ║   @   ║   #   ║   |   │                              │       ║       ║       ║       ║       ║       │
+     *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
+     *                  │   <   ║   >   │    ┌───────╥───────╥───────┐    ┌┬┬┬┬┬┬┬╥───────╥───────┐    │       ║       │
+     *                  └───────╨───────┘    │   (   ║   )   ║   _   │    ││┃┃┃┃┃│║       ║       │    └───────╨───────┘
+     *                                       └───────╬═══════╬═══════╡    ╞╧╧╧╧╧╧╧╬═══════╬───────┘
+     *                                               │       ║       │    │       ║       │
+     *                                               └───────╨───────┘    └───────╨───────┘
+     */
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                               XXXXXXX, KC_RSFT, KC_RCMD, KC_ROPT, KC_RCTL, XXXXXXX,
+    XXXXXXX, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                      KC_LT,   KC_GT,       KC_LPRN, KC_RPRN, KC_UNDS,     XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX,
                                                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
 
