@@ -57,6 +57,8 @@
 #define U_WRD_L LOPT(KC_LEFT)
 #define U_WRD_R LOPT(KC_RIGHT)
 #define U_END   LCMD(KC_RIGHT)
+#define U_TAB_L SCMD(KC_LBRC)
+#define U_TAB_R SCMD(KC_RBRC)
 
 enum custom_keycodes {
   U_QUEX = SAFE_RANGE // The custom key for ? and !
@@ -150,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │       ║       ║       ║       ║       ║       │                              │ PgDn  ║  ← ⌘  ║  ← ⌥  ║  ⌥ →  ║  ⌘ →  ║       │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
-     *                  │       ║       │    ┌───────╥┬┬┬┬┬┬┬╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
+     *                  │       ║       │    ┌───────╥┬┬┬┬┬┬┬╥───────┐    ┌───────╥───────╥───────┐    │ ← tab ║ tab → │
      *                  └───────╨───────┘    │       ║│┃┃┃┃┃│║       │    │ Enter ║ Bksp  ║  Del  │    └───────╨───────┘
      *                                       └───────╬╧╧╧╧╧╧╧╬═══════╡    ╞═══════╬═══════╬───────┘
      *                                               │       ║       │    │       ║       │
@@ -160,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               U_REDO,  U_PASTE, U_COPY,  U_CUT,   U_UNDO,  XXXXXXX,
     XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, XXXXXXX,                               KC_PGUP, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               KC_PGDN, U_HOME,  U_WRD_L, U_WRD_R, U_END,   XXXXXXX,
-                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX,     KC_ENT,  KC_BSPC, KC_DEL,      XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX,     KC_ENT,  KC_BSPC, KC_DEL,      U_TAB_L, U_TAB_R,
                                                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
 
