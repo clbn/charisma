@@ -307,6 +307,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(L_QWERTY);
       }
       return true;
+
+    // Disable Cmd+H (T→H rollover accidents)
+
+    case E_HRM_H:
+      // If it's tap (not hold) and Right Cmd is pressed (but other mods are not)
+      if (record->tap.count && (get_mods() == MOD_BIT(KC_RGUI))) {
+        return false;
+      }
+      return true;
   }
   return true;
 }
