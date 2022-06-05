@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_ENGRAM] = LAYOUT_5x6_5(
     /*
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
-     *  │       ║       ║       ║       ║       ║       │                              │       ║       ║       ║       ║       ║       │
+     *  │       ║       ║       ║       ║       ║ Engram│                              │Qwerty ║       ║       ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │       ║   B   ║   Y   ║   O   ║   U   ║  ' (  │                              │  " )  ║   L   ║   D   ║   W   ║   V   ║   Z   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
@@ -80,21 +80,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                  │       ║       │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
      *                  └───────╨───────┘    │Esc Med║Spc Nav║  Tab  │    │Ent Sym║Bsp Num║Del Fun│    └───────╨───────┘
      *                                       └───────╬═══════╬═══════╡    ╞═══════╬═══════╬───────┘
-     *                                               │Engram ║ Latin │    │  Cyr  ║ Qwerty│
+     *                                               │       ║       │    │       ║       │
      *                                               └───────╨───────┘    └───────╨───────┘
      */
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO_ENGR,                               TO_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
     KC_GRV,  E_HRM_C, E_HRM_I, E_HRM_E, E_HRM_A, KC_COMM,                               KC_DOT,  E_HRM_H, E_HRM_T, E_HRM_S, E_HRM_N, KC_Q,
     XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLASH,
                       XXXXXXX, XXXXXXX,     LT_MED,  LT_NAV,  KC_TAB,      LT_SYM,  LT_NUM,  LT_FUN,      XXXXXXX, XXXXXXX,
-                                                     TO_ENGR, HO_LNG1,     HO_LNG2, TO_QWER
+                                                     XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
 
   [L_QWERTY] = LAYOUT_5x6_5(
     /*
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
-     *  │       ║       ║       ║       ║       ║       │                              │       ║       ║       ║       ║       ║       │
+     *  │       ║       ║       ║       ║       ║ Engram│                              │Qwerty ║       ║       ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │       ║   Q   ║   W   ║   E   ║   R   ║   T   │                              │   Y   ║   U   ║   I   ║   O   ║   P   ║  [ {  │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                  │       ║       │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
      *                  └───────╨───────┘    │  Esc  ║Spce L2║  Tab  │    │ Enter ║Bksp L3║  Del  │    └───────╨───────┘
      *                                       └───────╬═══════╬═══════╡    ╞═══════╬═══════╬───────┘
-     *                                               │Engram ║ Latin │    │  Cyr  ║ Qwerty│
+     *                                               │       ║       │    │       ║       │
      *                                               └───────╨───────┘    └───────╨───────┘
      */
     _______, _______, _______, _______, _______, _______,                               _______, _______, _______, _______, _______, _______,
@@ -329,6 +329,21 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
           REACTIVATE_QWERTY = false;
           layer_on(L_QWERTY);
         }
+      }
+      break;
+
+    // Combine Engram/Qwerty layout change with host lang change:
+
+    case TO_ENGR:
+      // After switching to Engram layout, also switch to Latin input source
+      if (record->event.pressed) {
+        tap_code16(HO_LNG1);
+      }
+      break;
+    case TO_QWER:
+      // After switching to Qwerty layout, also switch to Cyrillic input source
+      if (record->event.pressed) {
+        tap_code16(HO_LNG2);
       }
       break;
   }
