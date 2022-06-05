@@ -271,3 +271,65 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &quex_exclaim_override,
     NULL
 };
+
+/*
+ * Temporarily turn off Qwerty layer (fall back to Engram) while Cmd/Opt/Ctrl are pressed
+ *
+ * This enables the use of common Latin-letter shortcuts (Cmd+T, Ctrl+C etc.)
+ * when typing in Cyrillic+Qwerty, without manually switching layouts.
+ *
+ * To achieve this, we:
+ *   1. Catch Cmd/Opt/Ctrl press in Qwerty layer and turn it off
+ *      (so the base Engram layer becomes active). This step happens in
+ *      process_record_user().
+ *   2. Catch Cmd/Opt/Ctrl release in Engram layer (since that one is
+ *      active after step 1), and if all of those mods are released,
+ *      reactivate Qwerty layer. This step happens in post_process_record_user(),
+ *      so we can check if the mods were released.
+ */
+
+bool REACTIVATE_QWERTY = false;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+
+    // Temporarily turn off Qwerty, step 1:
+
+    case Q_HRM_A: // Left Ctrl
+    case Q_HRM_S: // Left Opt
+    case Q_HRM_D: // Left Cmd
+    case Q_HRM_K: // Right Cmd
+    case Q_HRM_L: // Right Opt
+    case Q_HRM_C: // Right Ctrl
+      // If it's hold (not tap) and keydown (not keyup)
+      if (!record->tap.count && record->event.pressed) {
+        REACTIVATE_QWERTY = true;
+        layer_off(L_QWERTY);
+      }
+      return true;
+  }
+  return true;
+}
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+
+    // Temporarily turn off Qwerty, step 2:
+
+    case E_HRM_C: // Left Ctrl
+    case E_HRM_I: // Left Opt
+    case E_HRM_E: // Left Cmd
+    case E_HRM_T: // Right Cmd
+    case E_HRM_S: // Right Opt
+    case E_HRM_N: // Right Ctrl
+      // If it's hold (not tap) and keyup (not keydown)
+      if (!record->tap.count && !record->event.pressed) {
+        // If Qwerty layer was ON before and all C/A/G (Ctrl/Opt/Cmd) mods are released
+        if (REACTIVATE_QWERTY && !(get_mods() & MOD_MASK_CAG)) {
+          REACTIVATE_QWERTY = false;
+          layer_on(L_QWERTY);
+        }
+      }
+      break;
+  }
+}
