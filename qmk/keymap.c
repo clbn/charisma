@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_ENGRAM] = LAYOUT_5x6_5(
     /*
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
-     *  │       ║       ║       ║       ║       ║ Engram│                              │Qwerty ║       ║       ║       ║       ║       │
+     *  │       ║       ║       ║ Engram║       ║       │                              │       ║       ║Qwerty ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │       ║   B   ║   Y   ║   O   ║   U   ║  ' (  │                              │  " )  ║   L   ║   D   ║   W   ║   V   ║   Z   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
@@ -83,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                                               │       ║       │    │       ║       │
      *                                               └───────╨───────┘    └───────╨───────┘
      */
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO_ENGR,                               TO_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, TO_ENGR, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, TO_QWER, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
     KC_GRV,  E_HRM_C, E_HRM_I, E_HRM_E, E_HRM_A, KC_COMM,                               KC_DOT,  E_HRM_H, E_HRM_T, E_HRM_S, E_HRM_N, KC_Q,
     XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLSH,
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_QWERTY] = LAYOUT_5x6_5(
     /*
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
-     *  │       ║       ║       ║       ║       ║ Engram│                              │Qwerty ║       ║       ║       ║       ║       │
+     *  │       ║       ║       ║ Engram║       ║       │                              │       ║       ║Qwerty ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │       ║   Q   ║   W   ║   E   ║   R   ║   T   │                              │   Y   ║   U   ║   I   ║   O   ║   P   ║  [ {  │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
