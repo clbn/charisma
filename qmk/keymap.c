@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO_ENGR,                               TO_QWER, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
     KC_GRV,  E_HRM_C, E_HRM_I, E_HRM_E, E_HRM_A, KC_COMM,                               KC_DOT,  E_HRM_H, E_HRM_T, E_HRM_S, E_HRM_N, KC_Q,
-    XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLASH,
+    XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLSH,
                       XXXXXXX, XXXXXXX,     LT_MED,  LT_NAV,  KC_TAB,      LT_FUN,  LT_NUM,  LT_SYM,      XXXXXXX, XXXXXXX,
                                                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
@@ -196,23 +196,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
      *  │       ║       ║       ║       ║       ║       │                              │       ║       ║       ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║  [ {  ║  7 &  ║  8 *  ║  9 (  ║  ] }  │                              │       ║       ║       ║       ║       ║       │
+     *  │       ║   (   ║   7   ║   8   ║   9   ║   )   │                              │       ║       ║       ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║  ; :  ║  4 $  ║  5 %  ║  6 ^  ║  = +  │                              │       ║ Shift ║  Cmd  ║  Opt  ║ Ctrl  ║       │
+     *  │   `   ║   -   ║   4   ║   5   ║   6   ║   +   │                              │       ║ Shift ║  Cmd  ║  Opt  ║ Ctrl  ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║  ` ~  ║  1 !  ║  2 @  ║  3 #  ║  \ |  │                              │       ║       ║       ║       ║       ║       │
+     *  │       ║   /   ║   1   ║   2   ║   3   ║   *   │                              │       ║       ║       ║       ║       ║       │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
      *                  │   <   ║   >   │    ┌───────╥───────╥───────┐    ┌───────╥┬┬┬┬┬┬┬╥───────┐    │       ║       │
-     *                  └───────╨───────┘    │   .   ║  0 )  ║  - _  │    │       ║│┃┃┃┃┃│║       │    └───────╨───────┘
+     *                  └───────╨───────┘    │   .   ║   0   ║   =   │    │       ║│┃┃┃┃┃│║       │    └───────╨───────┘
      *                                       └───────╬═══════╬═══════╡    ╞═══════╬╧╧╧╧╧╧╧╬───────┘
      *                                               │       ║       │    │       ║       │
      *                                               └───────╨───────┘    └───────╨───────┘
      */
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,                                XXXXXXX, KC_RSFT, KC_RCMD, KC_ROPT, KC_RCTL, XXXXXXX,
-    XXXXXXX, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                      KC_LT,   KC_GT,       KC_PDOT, KC_0,    KC_MINS,     XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_LPRN, KC_7,    KC_8,    KC_9,    KC_RPRN,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    KC_GRV,  KC_MINS, KC_4,    KC_5,    KC_6,    KC_PLUS,                               XXXXXXX, KC_RSFT, KC_RCMD, KC_ROPT, KC_RCTL, XXXXXXX,
+    XXXXXXX, KC_SLSH, KC_1,    KC_2,    KC_3,    KC_ASTR,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                      KC_LT,   KC_GT,       KC_PDOT, KC_0,    KC_EQL,      XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX,
                                                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
 
@@ -221,11 +221,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
      *  │       ║       ║       ║       ║       ║       │                              │       ║       ║       ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   {   ║   &   ║   *   ║   (   ║   }   │                              │       ║       ║       ║       ║       ║       │
+     *  │       ║   {   ║   &   ║   *   ║   ?   ║   }   │                              │       ║       ║       ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   :   ║   $   ║   %   ║   ^   ║   +   │                              │       ║ Shift ║  Cmd  ║  Opt  ║ Ctrl  ║       │
+     *  │   ~   ║   [   ║   $   ║   %   ║   ^   ║   ]   │                              │       ║ Shift ║  Cmd  ║  Opt  ║ Ctrl  ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   ~   ║   !   ║   @   ║   #   ║   |   │                              │       ║       ║       ║       ║       ║       │
+     *  │       ║   \   ║   !   ║   @   ║   #   ║   |   │                              │       ║       ║       ║       ║       ║       │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
      *                  │   <   ║   >   │    ┌───────╥───────╥───────┐    ┌───────╥───────╥┬┬┬┬┬┬┬┐    │       ║       │
      *                  └───────╨───────┘    │   (   ║   )   ║   _   │    │       ║       ║│┃┃┃┃┃││    └───────╨───────┘
@@ -234,9 +234,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                                               └───────╨───────┘    └───────╨───────┘
      */
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                               XXXXXXX, KC_RSFT, KC_RCMD, KC_ROPT, KC_RCTL, XXXXXXX,
-    XXXXXXX, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_LCBR, KC_AMPR, KC_ASTR, KC_QUES, KC_RCBR,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    KC_TILD, KC_LBRC, KC_DLR,  KC_PERC, KC_CIRC, KC_RBRC,                               XXXXXXX, KC_RSFT, KC_RCMD, KC_ROPT, KC_RCTL, XXXXXXX,
+    XXXXXXX, KC_BSLS, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       KC_LT,   KC_GT,       KC_LPRN, KC_RPRN, KC_UNDS,     XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX,
                                                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   )
