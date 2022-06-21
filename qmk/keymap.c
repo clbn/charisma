@@ -61,7 +61,10 @@
 #define U_TAB_R SCMD(KC_RBRC)
 
 enum custom_keycodes {
-  U_QUEX = SAFE_RANGE // The custom key for ? and !
+  U_QUEX = SAFE_RANGE, // Custom key for ? and !
+  U_ARNG, // Macro for Å
+  U_ADIA, // Macro for Ä
+  U_ODIA  // Macro for Ö
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -71,11 +74,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
      *  │       ║       ║       ║ Engram║       ║       │                              │       ║       ║Qwerty ║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   B   ║   Y   ║   O   ║   U   ║  ' (  │                              │  " )  ║   L   ║   D   ║   W   ║   V   ║   Z   │
+     *  │   Å   ║   B   ║   Y   ║   O   ║   U   ║  ' (  │                              │  " )  ║   L   ║   D   ║   W   ║   V   ║   Z   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │  ` ~  ║ C ctl ║ I opt ║ E cmd ║ A sft ║  , ;  │                              │  . :  ║ H sft ║ T cmd ║ S opt ║ N ctl ║   Q   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   G   ║   X   ║   J   ║   K   ║  - _  │                              │  ? !  ║   R   ║   M   ║   F   ║   P   ║  / ?  │
+     *  │   Ä   ║   G   ║   X   ║   J   ║   K   ║  - _  │                              │  ? !  ║   R   ║   M   ║   F   ║   P   ║   Ö   │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
      *                  │       ║       │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
      *                  └───────╨───────┘    │Esc Med║Spc Nav║  Tab  │    │Ent Fun║Bsp Num║Del Sym│    └───────╨───────┘
@@ -84,9 +87,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *                                               └───────╨───────┘    └───────╨───────┘
      */
     XXXXXXX, XXXXXXX, XXXXXXX, TO_ENGR, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, TO_QWER, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
+    U_ARNG,  KC_B,    KC_Y,    KC_O,    KC_U,    KC_9,                                  KC_0,    KC_L,    KC_D,    KC_W,    KC_V,    KC_Z,
     KC_GRV,  E_HRM_C, E_HRM_I, E_HRM_E, E_HRM_A, KC_COMM,                               KC_DOT,  E_HRM_H, E_HRM_T, E_HRM_S, E_HRM_N, KC_Q,
-    XXXXXXX, KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    KC_SLSH,
+    U_ADIA,  KC_G,    KC_X,    KC_J,    KC_K,    KC_MINS,                               U_QUEX,  KC_R,    KC_M,    KC_F,    KC_P,    U_ODIA,
                       XXXXXXX, XXXXXXX,     LT_MED,  LT_NAV,  KC_TAB,      LT_FUN,  LT_NUM,  LT_SYM,      XXXXXXX, XXXXXXX,
                                                      XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX
   ),
@@ -288,9 +291,11 @@ const key_override_t **key_overrides = (const key_override_t *[]){
  *      so we can check if the mods were released.
  */
 
+uint8_t mod_state;
 bool REACTIVATE_QWERTY = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  mod_state = get_mods();
   switch (keycode) {
 
     // Temporarily turn off Qwerty, step 1:
@@ -312,7 +317,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case E_HRM_H:
       // If it's tap (not hold) and Right Cmd is pressed (but other mods are not)
-      if (record->tap.count && (get_mods() == MOD_BIT(KC_RGUI))) {
+      if (record->tap.count && (mod_state == MOD_BIT(KC_RGUI))) {
+        return false;
+      }
+      return true;
+
+    // Macros for Å, Ä, Ö
+
+    case U_ARNG:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RALT("a")); // Alt+A produces "å" in US ANSI on macOS (a.k.a. ABC)
+        return false;
+      }
+      return true;
+
+    case U_ADIA:
+    case U_ODIA:
+      if (record->event.pressed) {
+        clear_mods(); // Deactivate possibly pressed shift(s), otherwise Alt+U won't produce the dead key we need
+        SEND_STRING(SS_RALT("u")); // Send the dead key with Alt+U
+        set_mods(mod_state); // Restore modifier state
+        send_string(keycode == U_ADIA ? "a" : "o"); // Finally, send "A" or "O"
         return false;
       }
       return true;
