@@ -19,13 +19,27 @@
 #define LT_NUM  LT(L_NUM,   KC_BACKSPACE)
 #define LT_SYM  LT(L_SYM,   KC_DEL)
 
-// Bottom thumb rows: layer switching (turn on `layer` and turn off other layers)
+// Top finger rows: layer switching (turn on `layer` and turn off other layers)
 #define TO_ENGR TO(L_ENGRAM)
 #define TO_QWER TO(L_QWERTY)
 
-// Bottom thumb rows: host lang switching (sends shortcut for switching input source)
+// Host lang switching (sends shortcut for switching input source)
 #define HO_LNG1 LCMD(LSFT(KC_1))
 #define HO_LNG2 LCMD(LSFT(KC_2))
+
+// Extra Cyrillic letters
+// (there are 29 common letters in Belarusian, Russian, Rusyn and Ukrainian alphabets;
+// the outliers are listed below, defined for the default Ukrainian layout on macOS)
+#define UK_G    KC_GRV  // ґ
+#define UK_I    KC_S    // і
+#define UK_YI   KC_RBRC // ї
+#define UK_YE   KC_QUOT // є
+#define UK_APST KC_BSLS // ʼ (apostrophe)
+#define RU_YO   ROPT(KC_T)    // ё
+#define RU_Y    ROPT(KC_S)    // ы
+#define RU_E    ROPT(KC_QUOT) // э
+#define RU_HARD ROPT(KC_RBRC) // ъ
+#define BE_W    ROPT(KC_O)    // ў
 
 // Engram home row mods (a.k.a. mod tap keys: `mod` when held, `kc` when tapped)
 #define E_HRM_C LCTL_T(KC_C)
@@ -39,7 +53,7 @@
 
 // Qwerty home row mods (a.k.a. mod tap keys: `mod` when held, `kc` when tapped)
 #define Q_HRM_A LCTL_T(KC_A)
-#define Q_HRM_S LOPT_T(KC_S)
+#define Q_HRM_S LOPT_T(KC_S) // We need to use RU_Y here, but since that's modded with Opt, it won't work in a mod-tap. So we have to add a small piece of code in process_record_user() as a workaround.
 #define Q_HRM_D LCMD_T(KC_D)
 #define Q_HRM_F LSFT_T(KC_F)
 #define Q_HRM_J RSFT_T(KC_J)
@@ -72,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_ENGRAM] = LAYOUT_5x6_5(
     /*
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
-     *  │       ║       ║       ║ Engram║       ║       │                              │       ║       ║Qwerty ║       ║       ║       │
+     *  │       ║       ║       ║Eng/Eng║       ║       │                              │       ║       ║Qwe/Cyr║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
      *  │   Å   ║   B   ║   Y   ║   O   ║   U   ║  ' (  │                              │  " )  ║   L   ║   D   ║   W   ║   V   ║   Z   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
@@ -97,25 +111,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [L_QWERTY] = LAYOUT_5x6_5(
     /*
      *  ┌───────╥───────╥───────╥───────╥───────╥───────┐                              ┌───────╥───────╥───────╥───────╥───────╥───────┐
-     *  │       ║       ║       ║ Engram║       ║       │                              │       ║       ║Qwerty ║       ║       ║       │
+     *  │       ║       ║       ║Eng/Eng║       ║       │                              │       ║       ║Qwe/Cyr║       ║       ║       │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   Q   ║   W   ║   E   ║   R   ║   T   │                              │   Y   ║   U   ║   I   ║   O   ║   P   ║  [ {  │
+     *  │   ʼ   ║   Й   ║   Ц   ║   У   ║   К   ║   Е   │                              │   Н   ║   Г   ║   Ш   ║   Щ   ║   З   ║   Х   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │  ` ~  ║ A ctl ║ S opt ║ D cmd ║ F sft ║   G   │                              │   H   ║ J sft ║ K cmd ║ L opt ║ ;: ctl║  ' "  │
+     *  │   Ё   ║ Ф ctl ║ Ы opt ║ В cmd ║ А sft ║   П   │                              │   Р   ║ О sft ║ Л cmd ║ Д opt ║ Ж ctl ║   Э   │
      *  ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡                              ╞═══════╬═══════╬═══════╬═══════╬═══════╬═══════╡
-     *  │       ║   Z   ║   X   ║   C   ║   V   ║   B   │                              │   N   ║   M   ║  , <  ║  . >  ║  / ?  ║  } ]  │
+     *  │   Ў   ║   Я   ║   Ч   ║   С   ║   М   ║   И   │                              │   Т   ║   Ь   ║   Б   ║   Ю   ║  . ,  ║   Ъ   │
      *  └───────╨───────╬═══════╬═══════╬───────╨───────┘                              └───────╨───────╬═══════╬═══════╬───────╨───────┘
-     *                  │       ║       │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │       ║       │
+     *                  │   Ґ   ║   І   │    ┌───────╥───────╥───────┐    ┌───────╥───────╥───────┐    │   Ї   ║   Є   │
      *                  └───────╨───────┘    │Esc Med║Spc Nav║  Tab  │    │Ent Fun║Bsp Num║Del Sym│    └───────╨───────┘
      *                                       └───────╬═══════╬═══════╡    ╞═══════╬═══════╬───────┘
      *                                               │       ║       │    │       ║       │
      *                                               └───────╨───────┘    └───────╨───────┘
      */
     _______, _______, _______, _______, _______, _______,                               _______, _______, _______, _______, _______, _______,
-    _______, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-    _______, Q_HRM_A, Q_HRM_S, Q_HRM_D, Q_HRM_F, KC_G,                                  KC_H,    Q_HRM_J, Q_HRM_K, Q_HRM_L, Q_HRM_C, KC_QUOT,
-    _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
-                      XXXXXXX, XXXXXXX,     _______, _______, _______,     _______, _______, _______,     XXXXXXX, XXXXXXX,
+    UK_APST, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+    RU_YO,   Q_HRM_A, Q_HRM_S, Q_HRM_D, Q_HRM_F, KC_G,                                  KC_H,    Q_HRM_J, Q_HRM_K, Q_HRM_L, Q_HRM_C, RU_E,
+    BE_W,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RU_HARD,
+                      UK_G,    UK_I,        _______, _______, _______,     _______, _______, _______,     UK_YI,   UK_YE,
                                                      _______, _______,     _______, _______
   ),
 
@@ -295,6 +309,13 @@ uint8_t mod_state;
 bool REACTIVATE_QWERTY = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  // Workaround for sending a modded keycode ("Ы") in the mod-tap key
+  if (keycode == Q_HRM_S && record->event.pressed && record->tap.count) {
+    tap_code16(RU_Y);
+    return false;
+  }
+
   mod_state = get_mods();
   switch (keycode) {
 
