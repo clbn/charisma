@@ -1,25 +1,16 @@
-# Layout for Dactyl Manuform 5x6 with 5 thumb keys
+# Charisma
 
-An ergonomic keyboard layout inspired by [Miryoku](https://github.com/manna-harbour/miryoku).
+An ergonomic keymap with Engram and Qwerty layouts, made for Dactyl Manuform 5x6, 
+inspired by [Miryoku](https://github.com/manna-harbour/miryoku).
 
-## Code
+![All in one](./images/all-in-one.png)
+
+## QMK implementation
+
+*TBD*
+
+## Vial version (4 layers)
+
+*TBD*
 
 - [Vial layout file](./vial/charisma.vil)
-
-## Layers
-
-### Engram
-
-![Layer 0: Engram](./images/charisma-vial.layer-engram.png)
-
-### Qwerty
-
-![Layer 1: Qwerty](./images/charisma-vial.layer-qwerty.png)
-
-### Navigation + Clipboard
-
-![Layer 2: Nav+Clip](./images/charisma-vial.layer-nav.png)
-
-### Numbers + Symbols
-
-![Layer 3: Num+Sym](./images/charisma-vial.layer-num-sym.png)
