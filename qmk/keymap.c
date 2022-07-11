@@ -24,8 +24,8 @@
 #define TO_QWER TO(L_QWERTY)
 
 // Host lang switching (sends shortcut for switching input source)
-#define HO_LNG1 LCMD(LSFT(KC_1))
-#define HO_LNG2 LCMD(LSFT(KC_2))
+#define HO_LNG1 S(C(A(G(KC_S)))) // Hyper + S
+#define HO_LNG2 S(C(A(G(KC_K)))) // Hyper + K
 
 // Extra Cyrillic letters
 // (there are 29 common letters in Belarusian, Russian, Rusyn and Ukrainian alphabets;
